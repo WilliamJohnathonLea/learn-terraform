@@ -8,11 +8,6 @@ resource "aws_instance" "base_instance_1" {
   ]
   key_name = var.key_name
 
-  provisioner "file" {
-    source      = "files/bootstrap.sh"
-    destination = "/tmp/bootstrap.sh"
-  }
-
   provisioner "remote-exec" {
     connection {
       type  = "ssh"
