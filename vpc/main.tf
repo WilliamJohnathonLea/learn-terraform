@@ -42,18 +42,23 @@ module "vpc_key_pairs" {
 }
 
 module "vpc_jenkins" {
-  source = "./jenkins"
-  key_name = module.vpc_key_pairs.kp_name
+  source    = "./jenkins"
+  key_name  = module.vpc_key_pairs.kp_name
   subnet_id = module.vpc_subnets.subnet_1_id
-  sg_id = module.vpc_security_groups.public_sg_id
+  sg_id     = module.vpc_security_groups.public_sg_id
 }
 
-module "vpc_instances" {
-  source        = "./instances"
-  key_name      = module.vpc_key_pairs.kp_name
-  subnet_1_id   = module.vpc_subnets.subnet_1_id
-  subnet_2_id   = module.vpc_subnets.subnet_2_id
-  subnet_3_id   = module.vpc_subnets.subnet_3_id
-  public_sg_id  = module.vpc_security_groups.public_sg_id
-  private_sg_id = module.vpc_security_groups.private_sg_id
+module "dns" {
+  source                     = "../dns"
+  jenkins_master_instance_id = module.vpc_jenkins.jenkins_master_instance_id
 }
+
+# module "vpc_instances" {
+#   source        = "./instances"
+#   key_name      = module.vpc_key_pairs.kp_name
+#   subnet_1_id   = module.vpc_subnets.subnet_1_id
+#   subnet_2_id   = module.vpc_subnets.subnet_2_id
+#   subnet_3_id   = module.vpc_subnets.subnet_3_id
+#   public_sg_id  = module.vpc_security_groups.public_sg_id
+#   private_sg_id = module.vpc_security_groups.private_sg_id
+# }

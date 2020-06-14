@@ -1,6 +1,6 @@
 resource "aws_instance" "jenkins_master" {
   ami                         = "ami-0eb89db7593b5d434" # Ubuntu 18.04 LTS
-  instance_type               = "t2.small"
+  instance_type               = "t2.micro"
   subnet_id                   = var.subnet_id
   associate_public_ip_address = true
   vpc_security_group_ids = [

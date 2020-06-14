@@ -1,0 +1,1 @@
+variable "jenkins_master_instance_id" {}
